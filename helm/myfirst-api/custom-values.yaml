@@ -1,0 +1,21 @@
+replicaCount: 1
+fullnameOverride: sk0011-myfirst-helm
+image:
+  repository: skala-registry.skala-us.com/class-1/sk0011-webserver
+  tag: "1.0-dk3-ea50058"
+  pullPolicy: Always
+service:
+  type: ClusterIP
+  port: 8080
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: sk0011-helm.class-1.skala-us.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: wildcard-class-1-skala-us-com-tls
+      hosts:
+        - sk0011-helm.class-1.skala-us.com
